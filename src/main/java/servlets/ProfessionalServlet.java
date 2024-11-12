@@ -100,7 +100,18 @@ public class ProfessionalServlet extends HttpServlet {
         newProfessional.setIsActive(isActive);
         newProfessional.setCreatedAt(createdAt);
 
-        professionalDao.create(newProfessional);
+        try
+        {
+            professionalDao.create(newProfessional);
+            request.getSession().setAttribute("toastMessage", "Profissional cadastrado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao cadastrar profissional.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("professionals");
     }
 
@@ -116,14 +127,36 @@ public class ProfessionalServlet extends HttpServlet {
         professional.setName(name);
         professional.setIsActive(isActive);
 
-        professionalDao.update(professional);
+        try
+        {
+            professionalDao.update(professional);
+            request.getSession().setAttribute("toastMessage", "Profissional atualizado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao editar profissional.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("professionals");
     }
 
     private void deleteProfessional(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String id = request.getParameter("id");
 
-        professionalDao.delete(id);
+        try
+        {
+            professionalDao.delete(id);
+            request.getSession().setAttribute("toastMessage", "Profissional deletado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao deletar profissional.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("professionals");
     }
 }

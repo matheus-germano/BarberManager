@@ -98,7 +98,18 @@ public class PaymentMethodServlet extends HttpServlet {
         newPaymentMethod.setIsActive(isActive);
         newPaymentMethod.setCreatedAt(createdAt);
 
-        paymentMethodDao.create(newPaymentMethod);
+        try
+        {
+            paymentMethodDao.create(newPaymentMethod);
+            request.getSession().setAttribute("toastMessage", "Método de pagamento cadastrado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao criar cadastrar de pagamento.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("payment-methods");
     }
 
@@ -112,14 +123,36 @@ public class PaymentMethodServlet extends HttpServlet {
         paymentMethod.setName(name);
         paymentMethod.setIsActive(isActive);
 
-        paymentMethodDao.update(paymentMethod);
+        try
+        {
+            paymentMethodDao.update(paymentMethod);
+            request.getSession().setAttribute("toastMessage", "Método de pagamento atualizado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao atualizar método de pagamento.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("payment-methods");
     }
 
     private void deletePaymentMethod(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String id = request.getParameter("id");
 
-        paymentMethodDao.delete(id);
+        try
+        {
+            paymentMethodDao.delete(id);
+            request.getSession().setAttribute("toastMessage", "Método de pagamento deletado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao deletar método de pagamento.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("payment-methods");
     }
 }

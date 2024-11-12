@@ -100,7 +100,18 @@ public class ServiceServlet extends HttpServlet {
         newService.setIsActive(isActive);
         newService.setCreatedAt(createdAt);
 
-        serviceDao.create(newService);
+        try
+        {
+            serviceDao.create(newService);
+            request.getSession().setAttribute("toastMessage", "Serviço cadastrado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao cadastrar serviço.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("services");
     }
 
@@ -119,14 +130,36 @@ public class ServiceServlet extends HttpServlet {
         updatedService.setCreatedAt(createdAt);
         updatedService.setIsActive(isActive);
 
-        serviceDao.update(updatedService);
+        try
+        {
+            serviceDao.update(updatedService);
+            request.getSession().setAttribute("toastMessage", "Serviço atualizado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao atualizar serviço.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("services");
     }
 
     private void deleteService(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String id = request.getParameter("id");
 
-        serviceDao.delete(id);
+        try
+        {
+            serviceDao.delete(id);
+            request.getSession().setAttribute("toastMessage", "Serviço deletado com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao deletar serviço.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("services");
     }
 }

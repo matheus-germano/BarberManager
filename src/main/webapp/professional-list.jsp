@@ -5,7 +5,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
   <title>Lista de profissionais</title>
+
+  <script>
+    function showToast(type, message) {
+      Toastify({
+        text: message,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        }
+      }).showToast();
+    }
+
+    <%
+        String toastMessage = (String) session.getAttribute("toastMessage");
+        String toastType = (String) session.getAttribute("toastType");
+        if (toastMessage != null && toastType != null) {
+    %>
+    document.addEventListener("DOMContentLoaded", () => {
+      showToast("<%= toastType %>", "<%= toastMessage %>");
+    });
+    <% session.removeAttribute("toastMessage"); %>
+    <% session.removeAttribute("toastType"); %>
+    <% } %>
+  </script>
 </head>
 <body>
 <h1>Lista de profissionais</h1>

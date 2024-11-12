@@ -31,16 +31,14 @@ CREATE TABLE sale (
     payment_method_id VARCHAR(50) NOT NULL,
     total DOUBLE NOT NULL,
     sold_at DATE NOT NULL,
-    FOREIGN KEY (professional_document) REFERENCES professional (document),
-    FOREIGN KEY (payment_method_id) REFERENCES payment_method (id)
-    ON DELETE CASCADE
+    FOREIGN KEY (professional_document) REFERENCES professional (document) ON DELETE CASCADE,
+    FOREIGN KEY (payment_method_id) REFERENCES payment_method (id) ON DELETE CASCADE
 );
 
 CREATE TABLE sale_service (
     sale_id CHAR(36),
     service_id CHAR(36),
     PRIMARY KEY (sale_id, service_id),
-    FOREIGN KEY (sale_id) REFERENCES sale (id),
-    FOREIGN KEY (service_id) REFERENCES service (id)
-    ON DELETE CASCADE
+    FOREIGN KEY (sale_id) REFERENCES sale (id) ON DELETE CASCADE,
+    FOREIGN KEY (service_id) REFERENCES service (id) ON DELETE CASCADE
 );

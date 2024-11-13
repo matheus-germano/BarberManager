@@ -106,7 +106,7 @@ public class PaymentMethodServlet extends HttpServlet {
         }
         catch(Exception e)
         {
-            request.getSession().setAttribute("toastMessage", "Erro ao criar cadastrar de pagamento.");
+            request.getSession().setAttribute("toastMessage", "Erro ao cadastrar método de pagamento.");
             request.getSession().setAttribute("toastType", "error");
         }
 

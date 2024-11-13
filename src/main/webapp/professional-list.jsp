@@ -5,13 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Lista de profissionais</title>
+
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-  <title>Lista de profissionais</title>
-
   <script>
     function showToast(type, message) {
+      let toastBackground = {
+        "success": "linear-gradient(to right, #00b09b, #96c93d)",
+        "error": "linear-gradient(to right, #ff0000, #ff6666)"
+      };
+
       Toastify({
         text: message,
         duration: 3000,
@@ -19,7 +24,7 @@
         position: "right",
         stopOnFocus: true,
         style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
+          background: toastBackground[type] ?? "linear-gradient(to right, #333333, #b3b3b3)",
         }
       }).showToast();
     }

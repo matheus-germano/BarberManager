@@ -102,7 +102,18 @@ public class SaleServlet extends HttpServlet {
 
         SaleDto sale = new SaleDto(professional, paymentMethod, services, total, soldAt);
 
-        saleDao.createSaleWithServices(sale);
+        try
+        {
+            saleDao.createSaleWithServices(sale);
+            request.getSession().setAttribute("toastMessage", "Venda cadastrada com sucesso!");
+            request.getSession().setAttribute("toastType", "success");
+        }
+        catch(Exception e)
+        {
+            request.getSession().setAttribute("toastMessage", "Erro ao cadastrar venda.");
+            request.getSession().setAttribute("toastType", "error");
+        }
+
         response.sendRedirect("sales");
     }
 }

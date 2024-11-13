@@ -6,6 +6,41 @@
 <html>
 <head>
   <title>Lista de métodos de pagamento</title>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+  <script>
+    function showToast(type, message) {
+      let toastBackground = {
+        "success": "linear-gradient(to right, #00b09b, #96c93d)",
+        "error": "linear-gradient(to right, #ff0000, #ff6666)"
+      };
+
+      Toastify({
+        text: message,
+        duration: 3000,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: toastBackground[type] ?? "linear-gradient(to right, #333333, #b3b3b3)",
+        }
+      }).showToast();
+    }
+
+    <%
+        String toastMessage = (String) session.getAttribute("toastMessage");
+        String toastType = (String) session.getAttribute("toastType");
+        if (toastMessage != null && toastType != null) {
+    %>
+    document.addEventListener("DOMContentLoaded", () => {
+      showToast("<%= toastType %>", "<%= toastMessage %>");
+    });
+    <% session.removeAttribute("toastMessage"); %>
+    <% session.removeAttribute("toastType"); %>
+    <% } %>
+  </script>
 </head>
 <body>
 <h1>Lista de métodos de pagamento</h1>

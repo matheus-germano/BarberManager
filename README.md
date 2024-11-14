@@ -39,7 +39,7 @@ Durante o desenvolvimento do sistema, enfrentamos algumas dificuldades, incluind
 - **Incompatibilidade de Versões de Jakarta**: Algumas bibliotecas apresentaram incompatibilidades devido a diferentes versões de Jakarta, o que exigiu ajustes para garantir a execução correta do sistema.
 - **Execução em Máquinas Diferentes**: Variáveis de configuração e dependências causaram dificuldades ao executar o sistema em diferentes ambientes, o que exigiu ajustes nas configurações.
 - **Problemas com Tomcat e Conexão ao Banco de Dados**: O servidor Tomcat apresentou instabilidade ao lidar com a conexão ao banco de dados MySQL, o que demandou atenção à configuração do servidor e das conexões.
+- Devido a essas dificuldades, foi necessário iniciar um novo projeto do zero para assegurar a execução correta nas máquinas dos dois colaboradores do projeto. O link para o projeto antigo está disponível a seguir:
 
-## 6. Considerações Finais
+**Link para o projeto antigo:** https://github.com/Marcelo13104/ManagerBarber
 
-Barber-Manager é uma solução para auxiliar na administração e no controle de vendas de uma barbearia. As tecnologias escolhidas e a implementação do padrão MVC proporcionam um sistema robusto e escalável, pronto para suportar as operações do dia a dia de uma barbearia.
